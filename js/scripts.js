@@ -27,8 +27,8 @@ function doUpload() {
   xhr.open("POST", url, true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      // Every thing ok, file uploaded
-      console.log(xhr.responseText); // handle response.
+      // Go to new page
+      window.location = xhr.responseText;
     }
   };
   fd.append("file", file);
@@ -46,7 +46,6 @@ window.onload = function() {
     previewImage(file);
   }, false);
   window.addEventListener('paste', function(e){
-    //document.getElementById('fileinput').files = e.clipboardData.files;
     file = e.clipboardData.files[0];
     previewImage(file);
   }, false);
@@ -55,5 +54,4 @@ window.onload = function() {
       doUpload();
     }
   });
-
 }
