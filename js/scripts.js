@@ -21,7 +21,7 @@ function previewImage(file) {
 }
 
 function doUpload() {
-  var url = 'http://localhost:8080/upload'
+  var url = '/upload'
   var xhr = new XMLHttpRequest();
   var fd = new FormData();
   xhr.open("POST", url, true);
@@ -33,19 +33,21 @@ function doUpload() {
   };
   fd.append("file", file);
   var password = document.getElementById('password').value;
+  var duration = parseInt(document.getElementById('duration').value) * 60;
   fd.append("password", password);
-  fd.append("duration", 60);
+  fd.append("duration", duration);
   xhr.send(fd);
 }
 
 window.onload = function() {
+
   document.getElementById('fileinput').addEventListener('change', function(){
     file = this.files[0];
-    // This code is only for demo ...
-    console.log("name : " + file.name);
-    console.log("size : " + file.size);
-    console.log("type : " + file.type);
-    console.log("date : " + file.lastModified);
+    previewImage(file);
+  }, false);
+  window.addEventListener('paste', function(e){
+    //document.getElementById('fileinput').files = e.clipboardData.files;
+    file = e.clipboardData.files[0];
     previewImage(file);
   }, false);
   document.getElementById('upload').addEventListener('click', function(){
