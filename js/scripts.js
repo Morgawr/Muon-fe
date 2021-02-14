@@ -32,7 +32,8 @@ function doUpload() {
     }
   };
   fd.append("file", file);
-  fd.append("password", document.getElementById('password').text);
+  var password = document.getElementById('password').value;
+  fd.append("password", password);
   fd.append("duration", 60);
   xhr.send(fd);
 }
